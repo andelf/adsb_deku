@@ -918,8 +918,13 @@ fn build_tab_map<A: tui::backend::Backend>(
                     let name = if settings.opts.disable_lat_long {
                         format!("{key}").into_boxed_str()
                     } else {
-                        format!("{key} ({}, {})", position.latitude, position.longitude)
-                            .into_boxed_str()
+                        format!(
+                            "{} ({:.4}, {:.4})",
+                            adsb_airplanes.get_string_repl(*key),
+                            position.latitude,
+                            position.longitude
+                        )
+                        .into_boxed_str()
                     };
 
                     if !settings.opts.disable_icao {

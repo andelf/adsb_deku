@@ -73,6 +73,13 @@ impl Airplanes {
         self.0.get(&key)
     }
 
+    pub fn get_string_repl(&self, key: ICAO) -> String {
+        self.0
+            .get(&key)
+            .and_then(|state| state.callsign.clone())
+            .unwrap_or_else(|| key.to_string())
+    }
+
     /// Amount of currently tracked airplanes
     ///
     /// equivalent [`BTreeMap::len`]
